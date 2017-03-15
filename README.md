@@ -62,7 +62,8 @@ Testing is offered via the BackstopJS tool, which provides for "visual regressio
 The test "suite" is actually the pages of the documentation, found in `docs/documentation`. Each page there becomes a testable scenario in 
 a BackstopJS test. The test reports are both in HTML and in a CI-compatible JUnit XML format.
 
-To test your changes and automatically view the HTML report in a browser, first you need to build the documentation and serve it via
+To test your changes and automatically view the HTML report in a browser, you need to make some preparations before you
+begin making code changes in your local checkout. First you need to build the documentation and serve it via
 the jekyll tool. Install Jekyll first. Then, in another terminal session, do
 ```
 npm run start-docs
@@ -75,16 +76,18 @@ jekyll serve --config _config.local.yml,_config.localserver.yml
 
 Then in your original terminal session, do
 ```
-npm run test-backstop
-```
-
-If your code changes will actually change the visual appearance, first run the above,
-see if all the visual differences are what you want, and then
-```
 npm run ref-backstop
 ```
-which will generate new "reference screenshots" of every documentation page against
-which future test will run.
+
+That will create the "reference screenshots" against which BackstopJS will test.
+Then you can make your code changes for SaSS/CSS. To test for visual differences:
+```
+npm run test-backstop
+```
+If your code changes will actually change the visual appearance, first run the above,
+see if all the visual differences are what you want, and then run `npm run ref-backstop`
+again, which will generate new "reference screenshots". Then run `npm run test-backstop`
+again and your test report should show everything passing.
 
 ## Related projects
 
