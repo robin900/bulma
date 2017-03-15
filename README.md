@@ -70,10 +70,10 @@ npm run start-docs
 to watch and rebuild docs on the fly. Then in yet another terminal session, do
 ```
 cd docs
-jekyll serve _config.local.yml
+jekyll serve --config _config.local.yml,_config.localserver.yml
 ```
 
-Then do
+Then in your original terminal session, do
 ```
 npm run test-backstop
 ```
@@ -85,7 +85,6 @@ npm run ref-backstop
 ```
 which will generate new "reference screenshots" of every documentation page against
 which future test will run.
->>>>>>> backstop working config generator, etc.
 
 ## Related projects
 
