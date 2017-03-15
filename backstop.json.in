@@ -46,7 +46,7 @@
       "misMatchThreshold" : 3.0,
       "onBeforeScript": "onBefore.js",
       "onReadyScript": "onReady.js"
-    }
+    }{{#unless @last}},{{/unless}}
 {{/each}}
   ],
   "paths": {
