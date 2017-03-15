@@ -55,6 +55,38 @@ The documentation resides in the [docs](docs) directory, and is built with the R
 
 Browse the [online documentation here.](http://bulma.io/documentation/overview/start/)
 
+## Testing 
+
+Testing is offered via the BackstopJS tool, which provides for "visual regression testing" against PhantomJS, the Webkit-based headless browser.
+
+The test "suite" is actually the pages of the documentation, found in `docs/documentation`. Each page there becomes a testable scenario in 
+a BackstopJS test. The test reports are both in HTML and in a CI-compatible JUnit XML format.
+
+To test your changes and automatically view the HTML report in a browser, first you need to build the documentation and serve it via
+the jekyll tool. Install Jekyll first. Then, in another terminal session, do
+```
+npm run start-docs
+```
+to watch and rebuild docs on the fly. Then in yet another terminal session, do
+```
+cd docs
+jekyll serve _config.local.yml
+```
+
+Then do
+```
+npm run test-backstop
+```
+
+If your code changes will actually change the visual appearance, first run the above,
+see if all the visual differences are what you want, and then
+```
+npm run ref-backstop
+```
+which will generate new "reference screenshots" of every documentation page against
+which future test will run.
+>>>>>>> backstop working config generator, etc.
+
 ## Related projects
 
 * Bulma with Attribute Modules: https://github.com/j5bot/bulma-attribute-selectors

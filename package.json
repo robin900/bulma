@@ -24,7 +24,9 @@
     "autoprefixer": "^6.3.3",
     "captain-git-hook": "~1.0.5",
     "node-sass": "^3.4.2",
-    "postcss-cli": "^2.5.1"
+    "postcss-cli": "^2.5.1",
+    "backstopjs": "^2.6.7",
+    "handlebars": "^4.0.6"
   },
   "scripts": {
     "build": "npm run build-clean && npm run build-sass && npm run build-autoprefix",
@@ -38,7 +40,9 @@
     "start": "npm run build-sass -- --watch",
     "start-docs": "npm run docs-sass -- --watch",
     "start-test": "npm run test-sass -- --watch",
-    "test-sass": "node-sass --output-style expanded docs/bulma-test.sass docs/css/bulma-test.css"
+    "test-sass": "node-sass --output-style expanded docs/bulma-test.sass docs/css/bulma-test.css",
+    "ref-backstop": "node make-backstop-config && backstop reference --i",
+    "test-backstop": "node make-backstop-config && backstop test"
   },
   "files": [
     "css",
@@ -46,5 +50,7 @@
     "bulma.sass",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "dependencies": {
+  }
 }

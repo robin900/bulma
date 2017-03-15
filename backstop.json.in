@@ -1,0 +1,63 @@
+{
+  "id": "bulma_visual_regression_test",
+  "viewports": [
+    {
+      "name": "phone_v",
+      "width": 320,
+      "height": 480
+    },
+    {
+      "name": "phone_h",
+      "width": 480,
+      "height": 320
+    },
+    {
+      "name": "tablet_v",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "name": "tablet_h",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "name": "desktop_std",
+      "width": 1280,
+      "height": 1024
+    }
+  ],
+  "scenarios": [
+{{#each test_names}}
+    {
+      "label": "{{this}}",
+      "url": "http://localhost:4000/documentation/{{this}}/",
+      "hideSelectors": [
+      ],
+      "removeSelectors": [
+	"#carbon",
+	"section.bsa"
+      ],
+      "selectorExpansion": false,
+      "selectors": [
+      ],
+      "readyEvent": null,
+      "delay": 500,
+      "misMatchThreshold" : 3.0,
+      "onBeforeScript": "onBefore.js",
+      "onReadyScript": "onReady.js"
+    }
+{{/each}}
+  ],
+  "paths": {
+    "bitmaps_reference": "test/backstop_data/bitmaps_reference",
+    "bitmaps_test": "test/backstop_data/bitmaps_test",
+    "casper_scripts": "test/backstop_data/casper_scripts",
+    "html_report": "test/backstop_data/html_report",
+    "ci_report": "test/backstop_data/ci_report"
+  },
+  "casperFlags": [],
+  "engine": "phantomjs",
+  "report": ["browser", "CI"],
+  "debug": false
+}

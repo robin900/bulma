@@ -1,0 +1,37 @@
+var fs = require('fs');
+var path = require('path');
+var handlebars = require('handlebars');
+
+var tmpl = handlebars.compile("<div>{{foo}}</div>");
+
+var doc_walkdir = 'docs/documentation/';
+
+var walkSync = function(dir, filelist) {
+  var files = fs.readdirSync(dir);
+  filelist = filelist || [];
+  files.forEach(function(file) {
+    if (fs.statSync(path.join(dir, file)).isDirectory()) {
+      filelist = walkSync(path.join(dir, file), filelist);
+    }
+    else {
+      filelist.push(dir + "/" + file);
+    }
+  });
+  return filelist;
+};
+
+console.log("Looking for documentation pages to test in " + doc_walkdir);
+
+var test_names = walkSync(doc_walkdir).filter(function(p) { return p =~ /\.html$/; }).map(function(p) { return p.replace(doc_walkdir, '').replace(/^(.+)\.html$/, '$1'); });
+
+console.log("Found " + test_names.length + " documentation pages to test with backstop.");
+
+var config_contents = fs.readFileSync('backstop.json.in', {encoding: 'utf-8'});
+var config_tmpl = handlebars.compile(config_contents);
+
+var config_output = config_tmpl({
+  test_names: test_names
+});
+
+fs.writeFileSync('backstop.json', config_output);
+console.log("Wrote backstop.json configuration file.");
